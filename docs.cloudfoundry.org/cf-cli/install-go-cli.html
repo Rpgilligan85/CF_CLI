@@ -1,0 +1,1007 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from docs.cloudfoundry.org/cf-cli/install-go-cli.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Oct 2018 00:18:41 GMT -->
+<head>
+  <meta charset="utf-8">
+  <!-- Always force latest IE rendering engine or request Chrome Frame -->
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400italic,400,600' rel='stylesheet' type='text/css'>
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <title>
+      Installing the cf CLI |
+    Cloud Foundry Docs
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../stylesheets/all.css" rel="stylesheet" media="screen, print" />
+  <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+  <link href='https://docs.cloudfoundry.org/images/favicon.ico' rel='shortcut icon'>
+
+  <script src="../javascripts/all.js"></script>
+  <script type="text/javascript">
+if (window.location.host === 'docs.cloudfoundry.org') {
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22181585-2']);
+  _gaq.push(['_setDomainName', 'cloudfoundry.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.type = 'text/javascript';
+    ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(ga, s);
+  })();
+}
+</script>
+
+
+</head>
+
+<body class="cf-cli cf-cli_install-go-cli has-subnav">
+
+<div class="viewport">
+  <div class='wrap'>
+    <script type="text/javascript">
+      document.domain = "cloudfoundry.org";
+    </script>
+
+     
+  <header class="header header-layout">
+    <h1 class="logo">
+      <a href="https://docs.cloudfoundry.org/">Cloud Foundry Documentation</a>
+    </h1>
+    
+    <div class="header-links js-bar-links">
+      <div class="btn-menu" data-behavior="MenuMobile"></div>
+      
+      <div class="header-item">
+        <a href="https://www.cloudfoundry.org/community/" target="_blank">Get Involved</a>
+      </div>
+      <div class="searchbox header-item">
+  <form method="get" action="https://docs.cloudfoundry.org/search">
+    <input name="q" placeholder="Search" class="search-box" />
+  </form>
+</div>
+
+    </div>
+  </header>
+
+
+    <div class="container">
+
+      <!--googleoff: index-->
+      <div id="sub-nav" class="js-sidenav collapsible nav-container" role="navigation" data-behavior="Collapsible">
+  <a class="sidenav-title" data-behavior="SubMenuMobile">
+    Doc Index
+  </a>
+  <div class="nav-content">
+    <ul>
+     <li><strong>General Information</strong></li>
+     <!--<li><span>Cloud Foundry Documentation Overview</span></li>-->
+    <li>
+    <a href="https://docs.cloudfoundry.org/concepts/contribute.html">Contributing Documentation</a>
+    </li>
+     <li class="has_submenu">
+        <span>
+          Cloud Foundry Concepts
+        </span>
+        <ul>
+          <!--
+            <li>
+            <a href="/concepts/index.html">Cloud Foundry Concepts (landing)</a>
+            </li>
+          -->
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/overview.html">Cloud Foundry Overview</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/architecture/">Cloud Foundry Components</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/diego/diego-architecture.html">Diego Components and Architecture</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/diego/diego-auction.html">How the Diego Auction Allocates Jobs</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/how-applications-are-staged.html">How Applications Are Staged</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/diego/ssh-conceptual.html">Understanding Application SSH</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/roles.html">Orgs, Spaces, Roles, and Permissions</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/security.html">Cloud Foundry Security</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/container-security.html">Understanding Container Security</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/understand-cf-networking.html">Understanding Container-to-Container Networking</a>
+          </li>
+            <li>
+            <a href="https://docs.cloudfoundry.org/concepts/architecture/uaa.html">User Account and Authentication (UAA) Server</a>
+          </li>
+            <li>
+            <a href="https://docs.cloudfoundry.org/concepts/http-routing.html">HTTP Routing</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/stacks.html">Stacks</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>Cloud Foundry Command Line Interface (cf CLI)</span>
+        <ul>
+          <li>
+            <a href="install-go-cli.html">Installing the cf CLI</a>
+          </li>
+          <li>
+            <a href="getting-started.html">Getting Started with the cf CLI</a>
+          </li>
+          <li>
+            <a href="http-proxy.html">Using the cf CLI with a Proxy Server</a>
+          </li>
+          <li>
+            <a href="self-signed.html">Using the cf CLI with a Self-Signed Certificate</a>
+          </li>
+          <li>
+            <a href="use-cli-plugins.html">Using cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="develop-cli-plugins.html">Developing cf CLI Plugins</a>
+          </li>
+          <li>
+            <a href="cf-help.html">cf CLI Reference Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li><span><hr></span></li>
+      <li><strong>Information for Operators</strong></li>
+      <li class="has_submenu">
+        <a href="https://docs.cloudfoundry.org/deploying/index.html">Deploying Cloud Foundry</a>
+      <ul>
+        <li><a href="https://docs.cloudfoundry.org/deploying/common/dns_prereqs.html">Setting Up DNS for Your Environment</a></li>
+        <li class="has_submenu">
+          <a href="https://docs.cloudfoundry.org/deploying/cf-deployment/index.html">Deploying Cloud Foundry with cf-deployment</a>
+        <ul>
+          <li><a href="https://docs.cloudfoundry.org/deploying/common/aws.html">Deploying BOSH on AWS</a></li>
+          <li><a href="https://docs.cloudfoundry.org/deploying/cf-deployment/gcp.html">Deploying BOSH on GCP</a></li>
+          <li><a href="https://docs.cloudfoundry.org/deploying/cf-deployment/deploy-cf.html">Deploying Cloud Foundry</a></li>
+        </ul>
+        </li>
+        <li><a href="https://docs.cloudfoundry.org/deploying/migrating.html">Migrating from cf-release to cf-deployment</a></li>
+        <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/bbr/cf-backup.html">Configuring your Cloud Foundry for BOSH Backup and Restore</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/bbr/external-blobstores.html">Backup and Restore for External Blobstores</a>
+              </li>
+            </ul>
+        </li>
+        <li class="has_submenu">
+            <span>Additional Configuration</span>
+            <ul>
+            <li>
+              <a href="https://docs.cloudfoundry.org/concepts/high-availability.html">High Availability in Cloud Foundry</a>
+            </li>
+            <li>
+              <a href="https://docs.cloudfoundry.org/deploying/common/log_drain_blacklists.html">Log Drain Blacklist Configuration</a>
+            </li>
+            <li>
+              <a href="https://docs.cloudfoundry.org/deploying/common/cc-blobstore-config.html">Cloud Controller Blobstore Configuration</a>
+            </li>
+            </ul>
+        </li>
+      </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="https://docs.cloudfoundry.org/adminguide/index.html">Administering Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/buildpacks.html">Managing Custom Buildpacks</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/docker.html">Using Docker in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/cli-user-management.html">Creating and Managing Users with the cf CLI</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/uaa/uaa-user-management.html">Creating and Managing Users with the UAA CLI (UAAC)</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/quota-plans.html">Creating and Modifying Quota Plans</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/notifications.html">Getting Started with the Notifications Service</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/concepts/asg.html">Application Security Groups</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/cf-networking.html">Administering Container-to-Container Networking</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/isolation-segments.html">Managing Isolation Segments</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/routing-is.html">Routing for Isolation Segments</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/listing-feature-flags.html">Feature Flags</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/diego-cell-upgrade.html">Managing Diego Cell Limits During Upgrade</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/max-container-starts.html">Setting a Maximum Number of Started Containers</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/bbs-encryption-keys.html">Bulletin Board System (BBS) Data Store Encryption</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/enabling_ipv6.html">Enabling IPv6 for Hosted Applications</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/securing-traffic.html">Securing Traffic into Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/trusted-system-certificates.html">Configuring Trusted System Certificates for Applications</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/enabling-tcp-routing.html">Enabling TCP Routing</a>
+          </li>
+          <li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/troubleshooting_tcp_routing.html">Troubleshooting TCP Routing</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/zipkin_tracing.html">Enabling Zipkin Tracing</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/supporting-websockets.html">Supporting WebSockets</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/configure-lb-healthcheck.html">Configuring Load Balancer Healthchecks for Cloud Foundry Routers</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/troubleshooting_slow_requests.html">Troubleshooting Slow Requests in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/troubleshooting-router-error-responses.html">Troubleshooting Router Error Responses</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/setting-rate-limit-cloud-api.html">Setting the Rate Limit for the Cloud Controller API</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/deploy-vol-services.html">Adding Volume Services to your Deployment</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/adminguide/routing-keepalive.html">Router Back-End Keepalive Connections</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <a href="https://docs.cloudfoundry.org/running/">Running and Troubleshooting Cloud Foundry</a>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/managing-cf/logging.html">Cloud Foundry Logging</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/managing-cf/logging-config.html">Configuring System Logging</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/managing-cf/audit-events.html">Audit Events</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/managing-cf/usage-events.html">Usage Events and Billing</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/config-ssh.html">Configuring SSH Access for Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/config-cell-cleanup.html">Configuring Cell Disk Cleanup Scheduling</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/hm-notifications.html">Configuring Health Monitor Notifications</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/monitoring-test.html">Monitoring and Testing Diego Components</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/troubleshooting.html">Troubleshooting Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/uaa-performance.html">UAA Performance</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/uaa/uaa-metrics.html">UAA Performance Metrics</a>
+          </li>
+        </ul>
+      </li>
+      <li class="has_submenu">
+        <span>
+          Logging and Metrics in Cloud Foundry
+        </span>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/architecture.html">Overview of the Loggregator System</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/cli-plugin.html">Installing the Loggregator Plugin for CF CLI</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/cc-uaa-logging.html">Security Event Logging</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/all_metrics.html">Cloud Foundry Component Metrics</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/log-ops-guide.html">Loggregator Guide for Cloud Foundry Operators</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/data-sources.html">Cloud Foundry Data Sources</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/loggregator/nozzle-tutorial.html">Deploying a Nozzle to the Loggregator Firehose</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://bosh.io/docs/">BOSH Documentation</a>
+      </li>
+      <li class="has_submenu">
+        <a href="https://docs.cloudfoundry.org/bbr/index.html">BOSH Backup and Restore</a>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/installing.html">Installing BBR</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/bbr-rn.html">Release Notes for BBR</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/backup.html">Backing Up with BBR</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/restore.html">Restoring with BBR</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/logging.html">BBR Logging</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/bbr/bbr-devguide.html">BBR Developer's Guide</a>
+          </li>
+        </ul>
+      </li>
+      <li><span><hr></span></li>
+      <li><strong>Information for Developers</strong></li>
+      <li class="has_submenu">
+        <span>
+          Developing and Managing Applications
+        </span>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html">Considerations for Designing and Running an Application in the Cloud</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/deploy-app.html">Deploy an Application</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/large-app-deploy.html">Deploy a Large Application</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/push-docker.html">Deploy an App with Docker</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/start-restart-restage.html">Starting, Restarting, and Restaging Applications</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/manifest.html">Deploying with Application Manifests</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/app-lifecycle.html">Application Container Lifecycle</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/healthchecks.html">Using Application Health Checks</a></li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/cf-scale.html">Scaling an Application Using cf scale</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/using-tasks.html">Running Tasks</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/routes-domains.html">Routes and Domains</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/stacks.html">Changing Stacks</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html">Cloud Foundry Environment Variables</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html">Using Blue-Green Deployment to Reduce Downtime and Risk</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/streaming-logs.html">Application Logging in Cloud Foundry</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/troubleshoot-app-health.html">Troubleshooting Application Deployment and Health</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/app-ssh-overview.html">Application SSH Overview</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html">Accessing Apps with Diego SSH</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-services.html">Accessing Services with Diego SSH</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/trusted-system-certificates.html">Trusted System Certificates</a>
+         </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/cf-api-endpoint.html">Identifying your Cloud Foundry API Endpoint and Version</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/v3-commands.html">Using Experimental cf CLI Commands</a>
+          </li>
+          <li class="has_submenu">
+            <span>Integrating Service Instances with Applications</span>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/">Services Overview</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/application-binding.html">Delivering Service Credentials to an Application</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/managing-services.html">Managing Service Instances with the CLI</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/service-keys.html">Managing Service Keys</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/sharing-instances.html">Sharing Service Instances</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/user-provided.html">User-Provided Service Instances</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/route-binding.html">Manage Application Requests with Route Services</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/using-vol-services.html">Using an External File System (Volume Services)</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/play-service-bindings.html">Configuring Play Framework Service Connections</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/migrate-db.html">Migrating a Database in Cloud Foundry</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/log-management.html">Streaming Application Logs to Log Management Services</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/log-management-thirdparty-svc.html">Service-Specific Instructions for Streaming Application Logs</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/devguide/services/integrate-splunk.html">Integrating Cloud Foundry with Splunk</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has_submenu">
+          <a href="https://docs.cloudfoundry.org/buildpacks/">Buildpacks</a>
+        <ul>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/using-buildpacks.html">About Buildpacks</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/understand-buildpacks.html">Understanding Buildpacks</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/stack-association.html">Stack Association</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/use-multiple-buildpacks.html">Pushing an Application with Multiple Buildpacks</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/proxy-usage.html">Using a Proxy</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/supported-binary-dependencies.html">Supported Binary Dependencies</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/prod-server.html">Production Server Configuration</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/binary/index.html">Binary</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/go/index.html">Go</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/hwc/index.html">HWC</a>
+          </li>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/java/index.html">Java</a>
+            <ul>
+              <li>          
+                <a href="https://docs.cloudfoundry.org/buildpacks/java/java-tips.html">Tips for Java Developers</a>
+              </li>
+              <li class="has_submenu">
+                <a href="https://docs.cloudfoundry.org/buildpacks/java/getting-started-deploying-apps/index.html">Getting Started Deploying Apps</a>
+                <ul>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/java/getting-started-deploying-apps/gsg-grails.html">Grails</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/java/getting-started-deploying-apps/gsg-ratpack.html">Ratpack</a>
+                  </li>
+                  <li>
+                   <a href="https://docs.cloudfoundry.org/buildpacks/java/getting-started-deploying-apps/gsg-spring.html">Spring</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has_submenu">
+                <a href="https://docs.cloudfoundry.org/buildpacks/java/configuring-service-connections/index.html">Configuring Service Connections</a>
+                <ul>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/java/configuring-service-connections/grails-service-bindings.html">Grails</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/java/configuring-service-connections/play-service-bindings.html">Play</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/java/configuring-service-connections/spring-service-bindings.html">Spring</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/java/java-client.html">Cloud Foundry Java Client Library</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/dotnet-core/index.html">.NET Core</a>
+          </li>   
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/nginx/index.html">NGINX Buildpack</a>
+          </li>        
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/node/index.html">Node.js</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/node/node-tips.html">Tips for Node.js Applications</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/node/node-environment.html">Environment Variables Defined by the Node Buildpack</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/node/node-service-bindings.html">Configure Service Connections for Node.js</a>
+              </li>
+            </ul>
+          </li>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/php/index.html">PHP</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-tips.html">Tips for PHP Developers</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-usage.html">Getting Started Deploying PHP Apps</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-config.html">PHP Buildpack Configuration</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-composer.html">Composer</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-sessions.html">Sessions</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/php/gsg-php-newrelic.html">New Relic</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/python/index.html">Python</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/r/index.html">R</a>
+          </li>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/ruby/index.html">Ruby</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-tips.html">Tips for Ruby Developers</a>
+              </li>
+              <li class="has_submenu">
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/deploying-apps-index.html">Getting Started Deploying Apps</a>
+                <ul>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ruby.html">Ruby</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/ruby/gsg-ror.html">Ruby on Rails</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/rake-config.html">Configure Rake Tasks for Deployed Apps</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-environment.html">Environment Variables Defined by the Ruby Buildpack</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/ruby-service-bindings.html">Configure Service Connections for Ruby</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/ruby/windows.html">Support for Windows Gemfiles</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/buildpacks/staticfile/index.html">Staticfile</a>
+          </li>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/buildpacks/developing-buildpacks.html">Customizing and Developing Buildpacks</a>
+            <ul>
+              <li>
+                  <a href="https://docs.cloudfoundry.org/buildpacks/custom.html">Creating Custom Buildpacks</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/depend-pkg-offline.html">Packaging Dependencies for Offline Buildpacks</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/merging_upstream.html">Merging from Upstream Buildpacks</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/buildpacks/upgrading_dependency_versions.html">Upgrading Dependency Versions</a>
+              </li>
+              <li class="has_submenu">
+                <a href="https://docs.cloudfoundry.org/buildpacks/buildpack-ci-index.html">Using CI for Buildpacks</a>
+                <ul>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/releasing_a_new_buildpack_version.html">Releasing a New Buildpack Version</a>
+                  </li>
+                  <li>
+                    <a href="https://docs.cloudfoundry.org/buildpacks/updating-buildpack-related-gems.html">Updating Buildpack-Related Gems</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li><span><hr></span></li>
+      <li><strong>Information for Managed Service Authors</strong></li>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/">Custom Services</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/overview.html">Overview</a>
+          </li>
+          <li class="has_submenu">
+           <span>
+           Service Broker API
+           </span>
+           <ul>
+            <li>
+              <a href="https://github.com/openservicebrokerapi/servicebroker/blob/v2.13/spec.md">Open Service Broker API</a>
+            </li>
+            <li>
+              <a href="https://github.com/openservicebrokerapi/servicebroker/blob/v2.13/profile.md">Platform Profiles</a>
+            </li>
+            <li>
+              <a href="https://github.com/openservicebrokerapi/servicebroker/blob/v2.13/profile.md#service-metadata">Catalog Metadata</a>
+            </li>
+            <li>
+              <a href="https://github.com/openservicebrokerapi/servicebroker/blob/v2.13/spec.md#volume-mounts-object">Volume Services</a>
+            </li>
+            <li>
+              <a href="https://github.com/openservicebrokerapi/servicebroker/blob/v2.13/release-notes.md">Release Notes</a>
+            </li>
+          </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/managing-service-brokers.html">Managing Service Brokers</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/access-control.html">Access Control</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/binding-credentials.html">Binding Credentials</a>
+          </li>
+          <li class="has_submenu">
+            <a href="https://docs.cloudfoundry.org/credhub/index.html">CredHub</a>
+            <ul>
+              <li>
+                <a href="https://docs.cloudfoundry.org/credhub/setup-credhub-bosh.html">Setting Up and Deploying CredHub with BOSH</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/credhub/hsm-config.html">Configuring a Hardware Security Module</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/credhub/credential-types.html">CredHub Credential Types</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/credhub/backup-restore.html">Backing Up and Restoring CredHub Instances</a>
+              </li>
+              <li>
+                <a href="https://docs.cloudfoundry.org/credhub/troubleshooting-credhub.html">Troubleshooting CredHub</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/dashboard-sso.html">Dashboard Single Sign-On</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/enable-sharing.html">Enabling Service Instance Sharing</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/examples.html">Example Service Brokers</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/app-log-streaming.html">Application Log Streaming</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/route-services.html">Route Services</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/services/supporting-multiple-cf-instances.html">Supporting Multiple Cloud Foundry Instances</a>
+          </li>
+        </ul>
+
+      <li><span><hr></span></li>
+      <li><strong>API Reference</strong></li>
+      <li>
+        <a href="https://docs.cloudfoundry.org/api/uaa/index.html">UAA API</a>
+      </li>
+      <li class="has_submenu"><span>CAPI API</span>
+        <ul>
+          <li>
+            <a href="https://docs.cloudfoundry.org/devguide/capi/client-libraries.html">Client Libraries</a>
+          </li>
+          <li>
+            <a href="https://docs.cloudfoundry.org/running/rate-limit-cloud-controller-api.html">Rate Limit Information Returned by the Cloud Controller API</a>
+          </li>
+          <li>
+            <a href="http://apidocs.cloudfoundry.org/">CAPI V2</a>
+          </li>
+          <li>
+            <a href="http://v3-apidocs.cloudfoundry.org/index.html">CAPI V3</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+      <!--googleon: index-->
+
+      <main class="content content-layout" id="js-content" role="main">
+        <a id="top"></a>
+        
+          <h1 class="title-container">
+    Installing the cf CLI
+  </h1>
+
+          <div id="js-quick-links" >
+            <div class="quick-links"><ul>
+<li>
+<a href="#pkg">Use a Package Manager</a><ul>
+<li><a href="#pkg-mac">Mac OS X Installation</a></li>
+<li><a href="#pkg-linux">Linux Installation</a></li>
+</ul>
+</li>
+<li>
+<a href="#installer">Use an Installer</a><ul>
+<li><a href="#windows">Windows Installation</a></li>
+<li><a href="#mac">Mac OS X Installation</a></li>
+<li><a href="#linux">Linux Installation</a></li>
+</ul>
+</li>
+<li><a href="#bin">Use a Compressed Binary</a></li>
+<li><a href="#nextstep">Next Steps</a></li>
+<li>
+<a href="#uninstall">Uninstall the cf CLI</a><ul>
+<li><a href="#uninstall-pkg">Package Manager</a></li>
+<li><a href="#uninstall-installer">Installer</a></li>
+<li><a href="#uninstall-binary">Binary</a></li>
+<li><a href="#version5">cf CLI v5</a></li>
+</ul>
+</li>
+</ul></div>
+          </div>
+        <div class="to-top" id="js-to-top">
+          <a href="#top" title="back to top"></a>
+        </div>
+        <p><strong>Page last updated: <span data-behavior="DisplayModifiedDate" data-modified-date="1534183150000"></span></strong></p>
+
+<p>This topic describes how to install the Cloud Foundry Command Line Interface (cf CLI). Follow the instructions below for your operating system. If you previously used the cf CLI v5 Ruby gem, <a href="#version5">uninstall</a> this gem first.</p>
+
+<p>You can install the cf CLI with a package manager, an installer, or a compressed binary.</p>
+
+<h2 id="use-a-package-manager"><a id="pkg"></a>Use a Package Manager</h2>
+
+<h3 id="-mac-os-x-installation"><a id='pkg-mac'></a> Mac OS X Installation</h3>
+
+<p>For Mac OS X, perform the following steps to install the cf CLI with <a href="http://brew.sh/">Homebrew</a>:</p>
+
+<ol>
+<li>Tap the Cloud Foundry formula <a href="https://github.com/cloudfoundry/homebrew-tap">repository</a>:
+<pre class="terminal">$ brew tap cloudfoundry/tap</pre></li>
+<li>Install the cf CLI:
+<pre class="terminal">$ brew install cf-cli</pre></li>
+</ol>
+
+<h3 id="-linux-installation"><a id='pkg-linux'></a> Linux Installation</h3>
+
+<p>For Debian and Ubuntu-based Linux distributions, perform the following steps:</p>
+
+<ol>
+<li>Add the Cloud Foundry Foundation public key and package repository to your system:
+<pre class="terminal">$ wget -q -O - https<span>:</span>//packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -</pre>
+<pre class="terminal">$ echo &quot;deb https<span>:</span>//packages.cloudfoundry.org/debian stable main&quot; | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list</pre></li>
+<li>Update your local package index:
+<pre class="terminal">$ sudo apt-get update</pre></li>
+<li>Install the cf CLI:
+<pre class="terminal">$ sudo apt-get install cf-cli</pre></li>
+</ol>
+
+<p>For Enterprise Linux and Fedora systems (RHEL6/CentOS6 and up), perform the following steps:</p>
+
+<ol>
+<li>Configure the Cloud Foundry Foundation package repository:
+<pre class="terminal">$ sudo wget -O /etc/yum.repos.d/cloudfoundry-cli.repo https<span>:</span>//packages.cloudfoundry.org/fedora/cloudfoundry-cli.repo</pre></li>
+<li>Install the cf CLI, which also downloads and adds the public key to your system:
+<pre class="terminal">$ sudo yum install cf-cli</pre></li>
+</ol>
+
+<h2 id="use-an-installer"><a id="installer"></a>Use an Installer</h2>
+
+<p>Follow the instructions for your operating system below.</p>
+
+<h3 id="windows-installation"><a id="windows"></a>Windows Installation</h3>
+
+<p>You can run cf CLI in either the Windows Subsystem for Linux (WSL), also known as Bash on Windows, or in the 
+Windows command line. </p>
+
+<p>To use WSL, follow the <a href="#pkg-linux">Linux Installation</a> instructions.</p>
+
+<p>To use the cf CLI installer for the Windows command line, perform the following steps:</p>
+
+<ol>
+<li>Download <a href="https://cli.run.pivotal.io/stable?release=windows64&amp;source=github">the Windows installer</a>.</li>
+<li>Unpack the zip file.</li>
+<li>Right click on the &lsquo;cf_installer&rsquo; executable and select &ldquo;Run as Adminstrator&rdquo;</li>
+<li>When prompted, click <strong>Install</strong>, then <strong>Finish</strong>.</li>
+<li>To verify your installation, open a command prompt and type <code>cf</code>.
+If your installation was successful, the cf CLI help listing appears. You may need to restart the command prompt to see the cf CLI help listing appear. </li>
+</ol>
+
+<h3 id="mac-os-x-installation"><a id="mac"></a>Mac OS X Installation</h3>
+
+<p>To use the cf CLI installer for Mac OS X, perform the following steps:</p>
+
+<ol>
+<li>Download <a href="https://cli.run.pivotal.io/stable?release=macosx64&amp;source=github">the OS X installer</a>.</li>
+<li>Open the <code>.pkg</code> file.</li>
+<li>In the installer wizard, click <strong>Continue</strong>.</li>
+<li>Select an install destination and click <strong>Continue</strong>.</li>
+<li>When prompted, click <strong>Install</strong>.</li>
+<li>To verify your installation, open a terminal window and type <code>cf</code>.
+If your installation was successful, the cf CLI help listing appears.</li>
+</ol>
+
+<h3 id="linux-installation"><a id="linux"></a>Linux Installation</h3>
+
+<p>To use the cf CLI installer for Linux, perform the following steps:</p>
+
+<ol>
+<li>Download the Linux installer for your <a href="https://cli.run.pivotal.io/stable?release=debian64&amp;source=github">Debian/Ubuntu</a>
+or <a href="https://cli.run.pivotal.io/stable?release=redhat64&amp;source=github">Red Hat</a> system.</li>
+<li>Install using your system&rsquo;s package manager. Note these commands may require <code>sudo</code>.
+
+<ul>
+<li>For Debian/Ubuntu, run the following command: 
+<pre class="terminal">$ dpkg -i path/to/cf-cli-*.deb &amp;&amp; apt-get install -f</pre></li>
+<li>For Red Hat, run the following command: 
+<pre class="terminal">rpm -i path/to/cf-cli-*.rpm</pre></li>
+</ul></li>
+<li>To verify your installation, open a terminal window and type <code>cf</code>.
+If your installation was successful, the cf CLI help listing appears.</li>
+</ol>
+
+<h2 id="use-a-compressed-binary"><a id="bin"></a>Use a Compressed Binary</h2>
+
+<p>Download the compressed binary for Mac OS X, Windows, or Linux from the cf CLI GitHub <a href="https://github.com/cloudfoundry/cli#installers-and-compressed-binaries">repository</a> and install it on your system.</p>
+
+<p>The specific procedures vary by operating system, but the following example illustrates downloading and installing the binary on Mac OS X:</p>
+
+<ol>
+<li>Download and extract the Mac OS X binary:
+<pre class="terminal">$ curl -L &quot;https<span>:</span>//cli.run.pivotal.io/stable?release=macosx64-binary&amp;source=github&quot; | tar -zx</pre></li>
+<li>Move it to <code>/usr/local/bin</code>, or another location in your <code>$PATH</code>:
+<pre class="terminal">$ mv cf /usr/local/bin</pre></li>
+<li>Confirm your cf CLI version:
+<pre class="terminal">$ cf --version</pre></li>
+</ol>
+
+<h2 id="next-steps"><a id="nextstep"></a>Next Steps</h2>
+
+<p>See <a href="getting-started.html">Getting Started with cf CLI</a> for more information about how to use the cf CLI.</p>
+
+<p>We recommend that you review our <a href="https://github.com/cloudfoundry/cli/releases">CLI releases page</a> to learn when updates are released, and download a new binary or a new installer when you want to update to the latest version.</p>
+
+<h2 id="uninstall-the-cf-cli"><a id="uninstall"></a>Uninstall the cf CLI</h2>
+
+<h3 id="package-manager"><a id="uninstall-pkg"></a>Package Manager</h3>
+
+<p>If you previously installed the cf CLI with a package manager, follow the instructions specific to your package manager to uninstall the cf CLI.</p>
+
+<p>The specific procedures vary by package manager, but the following example illustrates uninstalling the cf CLI with Homebrew:</p>
+
+<pre class="terminal">$ brew uninstall cf-cli</pre>
+
+<h3 id="installer"><a id="uninstall-installer"></a>Installer</h3>
+
+<p>If you previously installed the cf CLI with an installer, perform the instructions specific to your operating system to uninstall the cf CLI:</p>
+
+<ul>
+<li><p>For Mac OS, delete the binary <code>/usr/local/bin/cf</code>, and the directory <code>/usr/local/share/doc/cf-cli</code>.</p></li>
+<li><p>For Windows, navigate to the <strong>Control Panel</strong>, click <strong>Programs and Features</strong>, select <code>Cloud Foundry CLI VERSION</code> and click <strong>Uninstall</strong>.</p></li>
+</ul>
+
+<h3 id="binary"><a id="uninstall-binary"></a>Binary</h3>
+
+<p>If you previously installed a cf CLI binary, remove the binary from where you copied it.</p>
+
+<h3 id="cf-cli-v5"><a id="version5"></a>cf CLI v5</h3>
+
+<p>To uninstall, run <code>gem uninstall cf</code>.</p>
+
+<p class="note"><strong>Note</strong>: To ensure that your Ruby environment manager registers the change, close and reopen your terminal.</p>
+
+        <a id='repo-link' href='http://github.com/cloudfoundry/docs-cf-cli/tree/master/install-go-cli.html.md.erb'>Create a pull request or raise an issue on the source for this page in GitHub</a>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<div id="scrim"></div>
+
+<div class="container">
+  <footer class="site-footer-links">
+    <div class="copyright">
+  <a href='https://docs.cloudfoundry.org/'>Cloud Foundry Documentation</a>
+  &copy; 2018 <a href='https://cloudfoundry.org/'>Cloud Foundry Foundation</a>. All Rights Reserved.
+</div>
+<div class="support">
+  <a href="https://www.cloudfoundry.org/community/" target="_blank">Get Involved</a>
+</div>
+
+  </footer>
+</div><!--end of container-->
+
+</body>
+
+<!-- Mirrored from docs.cloudfoundry.org/cf-cli/install-go-cli.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Oct 2018 00:18:41 GMT -->
+</html>
